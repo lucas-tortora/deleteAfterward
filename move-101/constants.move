@@ -1,7 +1,7 @@
 // Copyright (c) Mysten Labs, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-module book::constants {
+module iota_docs::constants {
     const MAX: u64 = 100;
 
     // however you can pass constant outside using a function
@@ -15,10 +15,9 @@ module book::constants {
     }
 }
 
-// ANCHOR: shop_price
-module book::shop_price {
-    use sui::coin::Coin;
-    use sui::sui::SUI;
+module iota_docs::shop_price {
+    use iota::coin::Coin;
+    use iota::iota::Iota;
 
     /// The price of an item in the shop.
     const ITEM_PRICE: u64 = 100;
@@ -29,7 +28,7 @@ module book::shop_price {
     public struct Item { /* ... */ }
 
     /// Purchase an item from the shop.
-    public fun purchase(coin: Coin<SUI>): Item {
+    public fun purchase(coin: Coin<iota>): Item {
         assert!(coin.value() == ITEM_PRICE, 0);
 
         transfer::public_transfer(coin, SHOP_OWNER);
@@ -37,22 +36,19 @@ module book::shop_price {
         Item { /* ... */ }
     }
 }
-// ANCHOR_END: shop_price
-#[allow(unused_const)]
-module book::naming {
 
-// ANCHOR: naming
+#[allow(unused_const)]
+module iota_docs::naming {
+
 /// Price of the item used at the shop.
 const ITEM_PRICE: u64 = 100;
 
 /// Error constant.
 const EItemNotFound: u64 = 1;
-// ANCHOR_END: naming
 
 }
 
-// ANCHOR: config
-module book::config {
+module iota_docs::config {
     const ITEM_PRICE: u64 = 100;
     const TAX_RATE: u64 = 10;
     const SHIPPING_COST: u64 = 5;
@@ -64,4 +60,3 @@ module book::config {
     /// Returns the shipping cost.
     public fun shipping_cost(): u64 { SHIPPING_COST }
 }
-// ANCHOR_END: config
